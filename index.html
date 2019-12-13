@@ -1,0 +1,207 @@
+<DOCTYPE! html>
+<meta charset="utf-8">
+<html lang="pt-br">
+<head>
+	    <script type="text/javascript">
+	        document.getElementById("questao");
+var counter = 0;
+var score = 0;
+var incorrect = [];
+
+window.onload = function(){
+    newQuestion();
+}
+
+function newQuestion() {
+  if(counter >= allQuestions.length) endQuiz();
+  else
+  var insertion = "<p>" + allQuestions[counter].question + "</p>";
+  for(i=0; i < allQuestions[counter].choices.length; i++) insertion += "<input id='" + i + "'type='radio' name='resposta' value='" + i + "'><label for='" + i + "'>" + allQuestions[counter].choices[i] + "</label></br>"; 
+  question.innerHTML = insertion;
+}
+
+function endQuiz() {
+  console.log("endQuiz Triggered");
+  var finalText = "<p class='score'>Você Acertou " + score + " de " + allQuestions.length + ".</p>";
+  question.innerHTML = finalText;
+  document.getElementById('button').style.display = "none";
+}
+
+function nextQuestion() {
+  checkScore();
+  counter++;
+  newQuestion();
+}
+
+function getRadioVal(form, name) {
+  var val;
+  var radios = form.elements[name];
+  
+  for (var i = 0, len = radios.length; i<len; i++) {
+    if ( radios[i].checked ) {
+      val = radios[i].value;
+      break;
+    }
+  }
+  return val;
+}
+
+function checkScore() {
+  var val = getRadioVal(document.getElementById('test'), 'resposta');
+  if (val == allQuestions[counter].correctAnswer) {
+    score++;
+  } else {
+    incorrect.push([counter, allQuestions[counter].choices[val]]);
+    console.log(incorrect);
+  }
+}
+
+var allQuestions = [{
+      question: "O Primeiro Reinado foi resultado de qual processo?",
+      choices: [      
+        "Independência do Brasil.",
+        "Revolução Praiera.",
+        "Revolução Liberal do Porto.",
+        "Constituição de 1824.",
+        "Constituição da Mandioca."
+        ],
+      correctAnswer: 0
+    },
+    {
+      question: "O que foi a Revolução Liberal do Porto?",
+      choices: [
+        "Demanda do retorno do rei portugues.",
+        "Guerra na Cisplatina.",
+        "Proclamação da Republíca.",
+        "Guerra no Paraguai.",
+        "Pressão no parlamentarismo portugues."
+      ],
+      correctAnswer: 0
+    },
+    {
+      question: "O Primeiro Reinado foi um período que se iniciou em 1822, com a independência do Brasil. Seu fim ocorreu em 1831, quando o imperador abriu mão do trono. Esse foi um período marcado pela pouca competência de D. Pedro I para exercer o cargo de imperador. Entre as alternativas abaixo, selecione o evento que NÃO aconteceu no Primeiro Reinado:",
+      choices: [
+        "Guerra da Cisplatina.",
+        "Confederação do Equador",
+        "Revolução Praiera",
+        "Noite da Agonia."
+      ],
+      correctAnswer: 2
+    },
+    {
+      question: "Sobre o processo de Independência deflagrado no Brasil em 1822, que implementou o Primeiro Reinado, é possível dizer que:",
+      choices: [
+        "Dom Pedro antecipou-se à estratégia de seu irmão.",
+        "foi um processo deflagrado no Brasil após a morte de D. João VI.",
+        "foi um processo coordenado pelos revolucionários latino-americanos, como Bartolomé Mitre e Simon Bolívar.",
+        "foi um reflexo da Revolução Liberal do Porto (1820), que exigiu o retornou de D. João VI para Portugal."
+      ],
+      correctAnswer: 3
+    },
+    {
+      question: "O episódio conhecido como A Noite das Garrafadas, briga entre portugueses e brasileiros, relaciona-se com:",
+      choices: [
+        "a promulgação da Constituição da Mandioca pela Assembleia Constituinte.",
+        "a instituição da Tarifa Alves Branco, que aumentava as taxas de alfândega, acirrando as disputas entre portugueses e brasileiros.",
+        "o descontentamento da população do Rio de Janeiro contra as medidas saneadoras de Oswaldo Cruz.",
+        "a manifestação dos brasileiros contra os portugueses ligados à sociedade Colunas do Trono que apoiavam Dom Pedro I."
+      ],
+      correctAnswer: 3
+    },
+    {
+      question: "Entre as causas da abdicação do trono por parte de D. Pedro I, está:",
+      choices: [
+        "a União Ibérica, entre Portugal e Espanha.",
+        "revoltas locais, como Revolução Farroupilha.",
+        "a crise financeira de 1829, que ocasionou o fechamento do Banco do Brasil.",
+        "a crise de legitimidade pelo não uso do Poder Moderador."
+      ],
+      correctAnswer: 2
+    },
+    {
+      question: "Sobre o Primeiro Reinado brasileiro (1822-1831), é CORRETO afirmar que:",
+      choices: [
+        "o rápido crescimento econômico do país após a independência, baseado na consolidação do café como principal produto nacional de exportação, garantiu a estabilidade política que caracterizou o reinado de D. Pedro I.",
+        "ao estabelecer o sufrágio censitário, a primeira Constituição brasileira, promulgada em 1824, sustentava a tese liberal de que “todos os homens nascem livres e iguais”.",
+        "a Confederação do Equador, que eclodiu no Nordeste em 1824, foi um movimento revolucionário de tendência liberal, separatista e republicana.",
+        "a oposição interna contra D. Pedro I reduziu-se com a conquista da província Cisplatina, ocorrida após a guerra travada entre 1825 e 1828 que resultou na separação da República da Banda Oriental do Uruguai."
+      ],
+      correctAnswer: 2
+    },
+    {
+      question: "Indique qual motivo NÃO foi escolhido para o Brasil se tornar uma Monarquia:",
+      choices: [
+        "Os idealizadores da nossa independência temiam que o território do Brasil fosse fragmentado caso instaurassem a república no país.",
+        "A elite brasileira havia sido letrada nas tradições monarquistas de Portugal.",
+        "Essa forma de governo evitava que transformações no status quo acontecessem.",
+        "Por causa da oposição anarquista que havia na época."
+      ],
+      correctAnswer: 3
+    },
+    {
+      question: "Como foi feita a Constituição de 1824?",
+      choices: [
+        "Uma Assembleia Constituinte que seria formada e que fosse escolhida por meio de eleições.",
+        "Após a Noite da Agonia.",
+        "Após a criação do Poder Moderador.",
+        "Com ajuda dos portugueses e dos espanhois que contribuiram.",
+      ],
+      correctAnswer: 0
+    },
+    {
+      question: "A sei la me beja",
+      choices: [
+        "bejo fodase",
+        "bejo mermo",
+        "bejo fodase",
+        "bejo fodase"
+      ],
+      correctAnswer: 1
+    }
+  ]
+	    </script>
+      <style type="text/css">
+        #design{
+          background-color: gray;
+          width: 350px;
+          padding: 5px;
+          border-color: white;
+          border-width: 5px;
+          border-style: inset;
+        }
+        #designtit{
+          background-color: gray;
+          width: 450px;
+          padding: 5px;
+          border-color: white;
+          border-width: 5px;
+          border-style: inset;
+        }
+        #designsubit{
+          background-color: gray;
+          width: 250px;
+          padding: 5px;
+          border-color: white;
+          border-width: 5px;
+          border-style: inset;
+        }
+      </style>
+    </head>
+    <body style="background-image: url(https://uploads.spiritfanfiction.com/fanfics/historias/201606/fanfiction-naruto-naruto-e-hinata-amor-eterno-5795000-180620160027.png);">
+        <center>
+    <div id="designtit">  
+        <h1>Provinha de História</h1>
+    </div>
+    <div id="designsubit">    
+		    <h2>Primeiro Reinado</h2>
+    </div>
+    <div id="design">
+		  <form id="test" METHOD=POST>
+		    <div id="question"></div>
+      <br>
+      </div> <br>
+		  <input type="button" value="Próxima Questão" id="button" onClick=nextQuestion(this.form)>
+	</form>
+       </center>
+    </body>
+</html>
